@@ -11,11 +11,13 @@ namespace CoreNN
         public Memory<float> WeightsAndBias;
         private Memory<float> m_Weights;
         private Memory<float> m_Bias;
+        private Memory<float> m_Inputs;
+        private Memory<float> m_Output;
 
-        public Neuron(Memory<float> weightsAndBias)
+        public Neuron(Memory<float> weightsAndBias, Memory<float> inputs, Memory<float> output)
         {
             WeightsAndBias = weightsAndBias;
-            m_Weights = WeightsAndBias[..^2];
+            m_Weights = WeightsAndBias[..^1];
             m_Bias = WeightsAndBias[^1..];
         }
 
@@ -25,6 +27,11 @@ namespace CoreNN
             var iv = new Vector<float>(inputs.Span);
             var m = Vector.Dot(iv, wv);
             return m + m_Bias.Span[0];
+        }
+
+        public void Calculate()
+        {
+
         }
     }
 }

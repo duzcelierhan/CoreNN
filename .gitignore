@@ -1,3 +1,7 @@
 CoreNN/.vs/
 CoreNN/CoreNN/bin/
 CoreNN/CoreNN/obj/
+CoreNN/Benchmarker/obj/
+CoreNN/CoreNNTest/bin/
+CoreNN/Benchmarker/bin/
+CoreNN/CoreNNTest/obj/

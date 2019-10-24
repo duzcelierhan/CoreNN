@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreNN", "CoreNN\CoreNN.csproj", "{2AE9435A-E90C-4CAA-8B46-7750A2C37801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreNN", "CoreNN\CoreNN.csproj", "{2AE9435A-E90C-4CAA-8B46-7750A2C37801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreNNTest", "CoreNNTest\CoreNNTest.csproj", "{35A8B2EC-16B6-4BC0-8276-EF953A06A892}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreNNTest", "CoreNNTest\CoreNNTest.csproj", "{35A8B2EC-16B6-4BC0-8276-EF953A06A892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarker", "Benchmarker\Benchmarker.csproj", "{6BCA79E3-50E7-41B9-ABDA-E3598D91F7F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{35A8B2EC-16B6-4BC0-8276-EF953A06A892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A8B2EC-16B6-4BC0-8276-EF953A06A892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A8B2EC-16B6-4BC0-8276-EF953A06A892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BCA79E3-50E7-41B9-ABDA-E3598D91F7F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BCA79E3-50E7-41B9-ABDA-E3598D91F7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BCA79E3-50E7-41B9-ABDA-E3598D91F7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BCA79E3-50E7-41B9-ABDA-E3598D91F7F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
