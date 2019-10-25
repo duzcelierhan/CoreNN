@@ -51,39 +51,45 @@ namespace CoreNNTest
         public void MultiplierTest()
         {
             var (fa1, fa2) = Read2ColumnFloatsFromFile(F2_1MFile);
-            Console.WriteLine("Starting calculations");
+            var (mem1, mem2) = (fa1.AsMemory(), fa2.AsMemory());
+            Console.WriteLine($"Starting calculations with file: {F2_1MFile}");
             var sw1 = Stopwatch.StartNew();
-            var rIntrFma = Multipliers.DotMultiplyIntrinsicWFma(fa1.AsMemory(), fa2.AsMemory());
+            var rIntrFma = Multipliers.DotMultiplyIntrinsicWFma(ref mem1, ref mem2);
             sw1.Stop();
             Console.WriteLine($"Intrinsic calculation (Fma) finished in {sw1.Elapsed}. Result is: {rIntrFma}");
 
             var sw1ptr = Stopwatch.StartNew();
-            var rIntrFmaPtr = Multipliers.DotMultiplyIntrinsicWFma(fa1.AsMemory(), fa2.AsMemory());
+            var rIntrFmaPtr = Multipliers.DotMultiplyIntrinsicWFmaWSpanPtr(ref mem1, ref mem2);
             sw1ptr.Stop();
             Console.WriteLine($"Intrinsic calculation (FmaWPtr) finished in {sw1ptr.Elapsed}. Result is: {rIntrFmaPtr}");
 
             var sw2 = Stopwatch.StartNew();
-            var rIntrAvx = Multipliers.DotMultiplyIntrinsicWAvx(fa1.AsMemory(), fa2.AsMemory());
+            var rIntrAvx = Multipliers.DotMultiplyIntrinsicWAvx(ref mem1, ref mem2);
             sw2.Stop();
             Console.WriteLine($"Intrinsic calculation (Avx) finished in {sw2.Elapsed}. Result is: {rIntrAvx}");
 
             var sw2ptr = Stopwatch.StartNew();
-            var rIntrAvxPtr = Multipliers.DotMultiplyIntrinsicWAvx(fa1.AsMemory(), fa2.AsMemory());
+            var rIntrAvxPtr = Multipliers.DotMultiplyIntrinsicWAvxWSpanPtr(ref mem1, ref mem2);
             sw2ptr.Stop();
             Console.WriteLine($"Intrinsic calculation (AvxWPtr) finished in {sw2ptr.Elapsed}. Result is: {rIntrAvxPtr}");
 
             var sw3 = Stopwatch.StartNew();
-            var rClas = Multipliers.DotMultiplyClassic(fa1.AsMemory(), fa2.AsMemory());
+            var rClas = Multipliers.DotMultiplyClassic(ref mem1, ref mem2);
             sw3.Stop();
             Console.WriteLine($"Classic calculation finished in {sw3.Elapsed}. Result is: {rClas}");
 
+            var sw3ptr = Stopwatch.StartNew();
+            var rClasPtr = Multipliers.DotMultiplyClassicWPtr(ref mem1, ref mem2);
+            sw3ptr.Stop();
+            Console.WriteLine($"Classic calculation With Ptr finished in {sw3ptr.Elapsed}. Result is: {rClasPtr}");
+
             var sw4 = Stopwatch.StartNew();
-            var rClasG4 = Multipliers.DotMultiplyClassicGroup4(fa1.AsMemory(), fa2.AsMemory());
+            var rClasG4 = Multipliers.DotMultiplyClassicGroup4(ref mem1, ref mem2);
             sw4.Stop();
             Console.WriteLine($"Classic calculation Group 4 finished in {sw4.Elapsed}. Result is: {rClasG4}");
 
             var sw5 = Stopwatch.StartNew();
-            var rClasG8 = Multipliers.DotMultiplyClassicGroup8(fa1.AsMemory(), fa2.AsMemory());
+            var rClasG8 = Multipliers.DotMultiplyClassicGroup8(ref mem1, ref mem2);
             sw4.Stop();
             Console.WriteLine($"Classic calculation Group 8 finished in {sw5.Elapsed}. Result is: {rClasG8}");
         }

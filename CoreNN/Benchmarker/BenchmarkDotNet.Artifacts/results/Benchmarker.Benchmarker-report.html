@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Benchmarker.Benchmarker-20191024-031144</title>
+<title>Benchmarker.Benchmarker-20191025-030622</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -23,15 +23,16 @@ Intel Xeon CPU E3-1505M v6 3.00GHz, 1 CPU, 8 logical and 4 physical cores
 </code></pre>
 
 <table>
-<thead><tr><th>         Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+<thead><tr><th>             Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>MultiplyAvx</td><td>414.3 us</td><td>7.915 us</td><td>10.01 us</td><td>414.9 us</td><td>0.31</td><td>0.01</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyAvxWSpanPtr</td><td>418.8 us</td><td>12.830 us</td><td>36.40 us</td><td>407.3 us</td><td>0.31</td><td>0.02</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyFma</td><td>392.5 us</td><td>10.268 us</td><td>28.62 us</td><td>386.4 us</td><td>0.32</td><td>0.03</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyFmaWSpanPtr</td><td>357.8 us</td><td>7.082 us</td><td>10.16 us</td><td>356.4 us</td><td>0.27</td><td>0.01</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyClassicSingle</td><td>1,353.4 us</td><td>26.009 us</td><td>25.54 us</td><td>1,362.7 us</td><td>1.00</td><td>0.00</td><td>6</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyClassicGroup4</td><td>864.2 us</td><td>12.670 us</td><td>11.23 us</td><td>865.1 us</td><td>0.64</td><td>0.02</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyClassicGroup8</td><td>824.4 us</td><td>16.366 us</td><td>19.48 us</td><td>817.2 us</td><td>0.61</td><td>0.02</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</thead><tbody><tr><td>MultiplyAvx</td><td>353.4 us</td><td>7.333 us</td><td>20.07 us</td><td>0.28</td><td>0.02</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyAvxWSpanPtr</td><td>316.1 us</td><td>6.290 us</td><td>14.83 us</td><td>0.24</td><td>0.01</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyFma</td><td>393.5 us</td><td>12.892 us</td><td>37.81 us</td><td>0.26</td><td>0.01</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyFmaWSpanPtr</td><td>300.1 us</td><td>5.899 us</td><td>11.37 us</td><td>0.23</td><td>0.01</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicSingle</td><td>1,323.3 us</td><td>24.182 us</td><td>22.62 us</td><td>1.00</td><td>0.00</td><td>7</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicSingleWPtr</td><td>1,364.6 us</td><td>27.131 us</td><td>29.03 us</td><td>1.04</td><td>0.03</td><td>8</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicGroup4</td><td>798.8 us</td><td>15.884 us</td><td>14.86 us</td><td>0.60</td><td>0.01</td><td>6</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicGroup8</td><td>779.3 us</td><td>16.512 us</td><td>20.88 us</td><td>0.59</td><td>0.02</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td>
 </tr></tbody></table>
 </body>
 </html>

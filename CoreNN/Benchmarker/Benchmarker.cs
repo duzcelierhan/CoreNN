@@ -14,8 +14,8 @@ namespace Benchmarker
     {
         private readonly float[] fa1;
         private readonly float[] fa2;
-        private readonly Memory<float> ma1;
-        private readonly Memory<float> ma2;
+        private Memory<float> ma1;
+        private Memory<float> ma2;
 
         public Benchmarker()
         {
@@ -26,43 +26,49 @@ namespace Benchmarker
         [Benchmark]
         public float MultiplyAvx()
         {
-            return DotMultiplyIntrinsicWAvx(ma1, ma2);
+            return DotMultiplyIntrinsicWAvx(ref ma1, ref ma2);
         }
 
         [Benchmark]
         public float MultiplyAvxWSpanPtr()
         {
-            return DotMultiplyIntrinsicWAvxWSpanPtr(ma1, ma2);
+            return DotMultiplyIntrinsicWAvxWSpanPtr(ref ma1, ref ma2);
         }
 
         [Benchmark]
         public float MultiplyFma()
         {
-            return DotMultiplyIntrinsicWFma(ma1, ma2);
+            return DotMultiplyIntrinsicWFma(ref ma1, ref ma2);
         }
 
         [Benchmark]
         public float MultiplyFmaWSpanPtr()
         {
-            return DotMultiplyIntrinsicWFmaWSpanPtr(ma1, ma2);
+            return DotMultiplyIntrinsicWFmaWSpanPtr(ref ma1, ref ma2);
         }
 
         [Benchmark(Baseline = true)]
         public float MultiplyClassicSingle()
         {
-            return DotMultiplyClassic(ma1, ma2);
+            return DotMultiplyClassic(ref ma1, ref ma2);
+        }
+
+        [Benchmark]
+        public float MultiplyClassicSingleWPtr()
+        {
+            return DotMultiplyClassicWPtr(ref ma1, ref ma2);
         }
 
         [Benchmark]
         public float MultiplyClassicGroup4()
         {
-            return DotMultiplyClassicGroup4(ma1, ma2);
+            return DotMultiplyClassicGroup4(ref ma1, ref ma2);
         }
 
         [Benchmark]
         public float MultiplyClassicGroup8()
         {
-            return DotMultiplyClassicGroup8(ma1, ma2);
+            return DotMultiplyClassicGroup8(ref ma1, ref ma2);
         }
     }
 }
