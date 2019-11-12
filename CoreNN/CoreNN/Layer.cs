@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics.X86;
-using System.Text;
 using System.Threading.Tasks;
 using CoreNN.ActivationFunctions;
 using CoreNN.Tools;
@@ -31,19 +27,19 @@ namespace CoreNN
             else Multiplier = Multipliers.DotMultiplyClassicGroup8;
         }
 
-        public Layer(int neuronCount, ref Memory<float>[] weights, ref Memory<float> inputs, ref Memory<float> outputs, IActivationFunction activationFunction)
+        public Layer(int neuronCount, ref Memory<float>[] weightsAndBiases, ref Memory<float> inputs, ref Memory<float> outputs, IActivationFunction activationFunction)
         {
-            if (weights.Length != neuronCount || inputs.Length != weights[0].Length - 1 || outputs.Length != neuronCount)
+            if (weightsAndBiases.Length != neuronCount || inputs.Length != weightsAndBiases[0].Length - 1 || outputs.Length != neuronCount)
                 throw new InvalidOperationException("Please check the arguments given");
             m_Inputs = inputs;
             m_Outputs = outputs;
             m_ActivationFunction = activationFunction;
-            m_Weights = weights;
+            m_Weights = weightsAndBiases;
 
             m_Neurons = new Neuron[neuronCount];
             for (var i = 0; i < neuronCount; i++)
             {
-                m_Neurons[i] = new Neuron(weights[i], inputs, outputs, activationFunction);
+                m_Neurons[i] = new Neuron(weightsAndBiases[i], inputs, outputs, activationFunction);
             }
         }
 

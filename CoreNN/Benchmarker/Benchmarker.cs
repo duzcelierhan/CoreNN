@@ -1,74 +1,92 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using BenchmarkDotNet.Attributes;
 using static CoreNN.Tools.Multipliers;
 using static CoreNNTest.Tests;
+// ReSharper disable ArrangeMethodOrOperatorBody
 
 namespace Benchmarker
 {
     [RankColumn]
     [MemoryDiagnoser]
-    [CoreJob]
+    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp30)]
+    [DisassemblyDiagnoser(printAsm: true, printSource: true)]
     public class Benchmarker
     {
-        private readonly float[] fa1;
-        private readonly float[] fa2;
-        private Memory<float> ma1;
-        private Memory<float> ma2;
+        private Memory<float> m_Ma1;
+        private Memory<float> m_Ma2;
 
         public Benchmarker()
         {
+            float[] fa2;
+            float[] fa1;
             (fa1, fa2) = Read2ColumnFloatsFromFile(F2_1MFile);
-            (ma1, ma2) = (fa1.AsMemory(), fa2.AsMemory());
+            (m_Ma1, m_Ma2) = (fa1.AsMemory(), fa2.AsMemory());
         }
 
         [Benchmark]
         public float MultiplyAvx()
         {
-            return DotMultiplyIntrinsicWAvx(ref ma1, ref ma2);
+            return DotMultiplyIntrinsicWAvx(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyAvxWSpanPtr()
         {
-            return DotMultiplyIntrinsicWAvxWSpanPtr(ref ma1, ref ma2);
+            return DotMultiplyIntrinsicWAvxWSpanPtr(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyFma()
         {
-            return DotMultiplyIntrinsicWFma(ref ma1, ref ma2);
+            return DotMultiplyIntrinsicWFma(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyFmaWSpanPtr()
         {
-            return DotMultiplyIntrinsicWFmaWSpanPtr(ref ma1, ref ma2);
+            return DotMultiplyIntrinsicWFmaWSpanPtr(ref m_Ma1, ref m_Ma2);
+        }
+
+        [Benchmark]
+        public float MultiplyWithVector()
+        {
+            return DotMultiplyIntrinsicWVector(ref m_Ma1, ref m_Ma2);
+        }
+
+        [Benchmark]
+        public float MultiplyWithVectorDot()
+        {
+            return DotMultiplyIntrinsicWVectorDot(ref m_Ma1, ref m_Ma2);
+        }
+
+        [Benchmark]
+        public float MultiplyWithVectorMul()
+        {
+            return DotMultiplyIntrinsicWVectorMul(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark(Baseline = true)]
         public float MultiplyClassicSingle()
         {
-            return DotMultiplyClassic(ref ma1, ref ma2);
+            return DotMultiplyClassic(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyClassicSingleWPtr()
         {
-            return DotMultiplyClassicWPtr(ref ma1, ref ma2);
+            return DotMultiplyClassicWPtr(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyClassicGroup4()
         {
-            return DotMultiplyClassicGroup4(ref ma1, ref ma2);
+            return DotMultiplyClassicGroup4(ref m_Ma1, ref m_Ma2);
         }
 
         [Benchmark]
         public float MultiplyClassicGroup8()
         {
-            return DotMultiplyClassicGroup8(ref ma1, ref ma2);
+            return DotMultiplyClassicGroup8(ref m_Ma1, ref m_Ma2);
         }
     }
 }

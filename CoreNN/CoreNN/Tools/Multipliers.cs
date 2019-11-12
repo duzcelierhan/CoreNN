@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
@@ -231,6 +232,148 @@ namespace CoreNN.Tools
             {
                 var h = vector1.Length > vector2.Length ? span1 : span2;
                   for (var j = cnt; j < h.Length; j++)
+                {
+                    total += h[j];
+                }
+            }
+
+            return total;
+        }
+
+        public static float DotMultiplyIntrinsicWVector(ref Memory<float> mem1, ref Memory<float> mem2)
+        {
+            var span1 = mem1.Span;
+            var span2 = mem2.Span;
+            var cnt = Math.Min(span1.Length, span2.Length);
+            var v3 = Vector<float>.Zero;
+            var vectLen = Vector<float>.Count;
+            var vectCnt = cnt / vectLen;
+#if TEST
+            var file = Path.GetTempFileName();
+            using var writer = new StreamWriter(file);
+            Console.WriteLine($"Intrinsic with Fma Mult. results will be written into {file}");
+#endif
+
+            int i;
+            var total = 0f;
+            for (i = 0; i < vectCnt; i++)
+            {
+                var index = i * vectLen;
+                var v1 = new Vector<float>(span1.Slice(index));
+                var v2 = new Vector<float>(span2.Slice(index));
+                v3 += v1 * v2;
+#if TEST
+                    writer.WriteLine($"{v1.ToString()}\t{v2.ToString()}\t{v3.ToString()}");
+#endif
+            }
+
+            for (i = 0; i < vectLen; i++)
+            {
+                total += v3[i];
+            }
+
+            for (i = vectCnt * vectLen; i < cnt; i++)
+            {
+                total += span1[i] * span2[i];
+            }
+
+            if (span1.Length != span2.Length)
+            {
+                var h = span1.Length > span2.Length ? span1 : span2;
+                for (var j = cnt; j < h.Length; j++)
+                {
+                    total += h[j];
+                }
+            }
+
+            return total;
+        }
+
+        public static float DotMultiplyIntrinsicWVectorDot(ref Memory<float> mem1, ref Memory<float> mem2)
+        {
+            var span1 = mem1.Span;
+            var span2 = mem2.Span;
+            var cnt = Math.Min(span1.Length, span2.Length);
+            var vectLen = Vector<float>.Count;
+            var vectCnt = cnt / vectLen;
+#if TEST
+            var file = Path.GetTempFileName();
+            using var writer = new StreamWriter(file);
+            Console.WriteLine($"Intrinsic with Fma Mult. results will be written into {file}");
+#endif
+
+            int i;
+            var total = 0f;
+            for (i = 0; i < vectCnt; i++)
+            {
+                var index = i * vectLen;
+                var v1 = new Vector<float>(span1.Slice(index));
+                var v2 = new Vector<float>(span2.Slice(index));
+                total += Vector.Dot(v1, v2);
+#if TEST
+                    writer.WriteLine($"{v1.ToString()}\t{v2.ToString()}\t{v3.ToString()}");
+#endif
+            }
+
+            for (i = vectCnt * vectLen; i < cnt; i++)
+            {
+                total += span1[i] * span2[i];
+            }
+
+            if (span1.Length != span2.Length)
+            {
+                var h = span1.Length > span2.Length ? span1 : span2;
+                for (var j = cnt; j < h.Length; j++)
+                {
+                    total += h[j];
+                }
+            }
+
+            return total;
+        }
+
+        public static float DotMultiplyIntrinsicWVectorMul(ref Memory<float> mem1, ref Memory<float> mem2)
+        {
+            var span1 = mem1.Span;
+            var span2 = mem2.Span;
+            var cnt = Math.Min(span1.Length, span2.Length);
+            var v3 = Vector<float>.Zero;
+            var vectLen = Vector<float>.Count;
+            var vectCnt = cnt / vectLen;
+#if TEST
+            var file = Path.GetTempFileName();
+            using var writer = new StreamWriter(file);
+            Console.WriteLine($"Intrinsic with Fma Mult. results will be written into {file}");
+#endif
+
+            int i;
+            var total = 0f;
+            for (i = 0; i < vectCnt; i++)
+            {
+                var index = i * vectLen;
+                var v1 = new Vector<float>(span1.Slice(index));
+                var v2 = new Vector<float>(span2.Slice(index));
+                var t = Vector.Multiply(v1, v2);
+                v3 = Vector.Add(v3, t);
+#if TEST
+                    writer.WriteLine($"{v1.ToString()}\t{v2.ToString()}\t{v3.ToString()}");
+#endif
+            }
+
+            for (i = 0; i < vectLen; i++)
+            {
+                total += v3[i];
+            }
+
+            for (i = vectCnt * vectLen; i < cnt; i++)
+            {
+                total += span1[i] * span2[i];
+            }
+
+            if (span1.Length != span2.Length)
+            {
+                var h = span1.Length > span2.Length ? span1 : span2;
+                for (var j = cnt; j < h.Length; j++)
                 {
                     total += h[j];
                 }
