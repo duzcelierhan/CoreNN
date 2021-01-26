@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Benchmarker.Benchmarker-20191112-102237</title>
+<title>Benchmarker.Benchmarker-20210121-123118</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -13,29 +13,29 @@
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
-Intel Xeon CPU E3-1505M v6 3.00GHz, 1 CPU, 8 logical and 4 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  Job-EVJDWA : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+BenchmarkDotNet=v0.12.1, OS=Windows 10.0.18363.1256 (1909/November2018Update/19H2)
+Intel Core i7-6700HQ CPU 2.60GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=5.0.102
+  [Host]        : .NET Core 5.0.2 (CoreCLR 5.0.220.61120, CoreFX 5.0.220.61120), X64 RyuJIT
+  .NET Core 5.0 : .NET Core 5.0.2 (CoreCLR 5.0.220.61120, CoreFX 5.0.220.61120), X64 RyuJIT
 </code></pre>
-<pre><code>Runtime=.NET Core 3.0  
+<pre><code>Job=.NET Core 5.0  Runtime=.NET Core 5.0  
 </code></pre>
 
 <table>
-<thead><tr><th>             Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+<thead><tr><th>             Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Code Size</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>MultiplyAvx</td><td>389.7 us</td><td>7.69 us</td><td>14.45 us</td><td>388.7 us</td><td>0.29</td><td>0.01</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyAvxWSpanPtr</td><td>380.4 us</td><td>15.61 us</td><td>46.03 us</td><td>370.3 us</td><td>0.27</td><td>0.02</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyFma</td><td>430.9 us</td><td>8.51 us</td><td>20.55 us</td><td>432.9 us</td><td>0.32</td><td>0.02</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyFmaWSpanPtr</td><td>334.2 us</td><td>6.65 us</td><td>15.00 us</td><td>333.0 us</td><td>0.25</td><td>0.01</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyWithVector</td><td>385.9 us</td><td>7.59 us</td><td>9.60 us</td><td>384.6 us</td><td>0.28</td><td>0.01</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyWithVectorDot</td><td>433.5 us</td><td>8.56 us</td><td>9.52 us</td><td>431.6 us</td><td>0.32</td><td>0.01</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyWithVectorMul</td><td>385.2 us</td><td>7.52 us</td><td>13.56 us</td><td>383.2 us</td><td>0.29</td><td>0.01</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyClassicSingle</td><td>1,367.0 us</td><td>21.14 us</td><td>19.77 us</td><td>1,363.9 us</td><td>1.00</td><td>0.00</td><td>6</td><td>-</td><td>-</td><td>-</td><td>1 B</td>
-</tr><tr><td>MultiplyClassicSingleWPtr</td><td>1,375.2 us</td><td>21.59 us</td><td>20.20 us</td><td>1,371.3 us</td><td>1.01</td><td>0.03</td><td>6</td><td>-</td><td>-</td><td>-</td><td>1 B</td>
-</tr><tr><td>MultiplyClassicGroup4</td><td>837.1 us</td><td>16.55 us</td><td>17.71 us</td><td>832.8 us</td><td>0.61</td><td>0.01</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MultiplyClassicGroup8</td><td>820.6 us</td><td>16.33 us</td><td>40.96 us</td><td>806.8 us</td><td>0.64</td><td>0.03</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</thead><tbody><tr><td>MultiplyAvx</td><td>400.7 &mu;s</td><td>7.90 &mu;s</td><td>18.63 &mu;s</td><td>0.25</td><td>0.01</td><td>2</td><td>537 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyAvxWSpanPtr</td><td>369.8 &mu;s</td><td>7.38 &mu;s</td><td>18.09 &mu;s</td><td>0.23</td><td>0.01</td><td>1</td><td>593 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyFma</td><td>397.5 &mu;s</td><td>7.88 &mu;s</td><td>19.61 &mu;s</td><td>0.25</td><td>0.01</td><td>2</td><td>519 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyFmaWSpanPtr</td><td>369.1 &mu;s</td><td>7.26 &mu;s</td><td>12.72 &mu;s</td><td>0.23</td><td>0.01</td><td>1</td><td>594 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyWithVector</td><td>430.2 &mu;s</td><td>7.94 &mu;s</td><td>15.68 &mu;s</td><td>0.27</td><td>0.01</td><td>3</td><td>546 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyWithVectorDot</td><td>502.1 &mu;s</td><td>11.04 &mu;s</td><td>31.49 &mu;s</td><td>0.32</td><td>0.02</td><td>4</td><td>513 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyWithVectorMul</td><td>438.2 &mu;s</td><td>8.74 &mu;s</td><td>17.65 &mu;s</td><td>0.28</td><td>0.01</td><td>3</td><td>546 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicSingle</td><td>1,579.0 &mu;s</td><td>12.51 &mu;s</td><td>11.70 &mu;s</td><td>1.00</td><td>0.00</td><td>7</td><td>372 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicSingleWPtr</td><td>1,629.9 &mu;s</td><td>23.91 &mu;s</td><td>22.36 &mu;s</td><td>1.03</td><td>0.02</td><td>8</td><td>418 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicGroup4</td><td>903.8 &mu;s</td><td>17.45 &mu;s</td><td>21.43 &mu;s</td><td>0.58</td><td>0.01</td><td>6</td><td>570 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MultiplyClassicGroup8</td><td>880.0 &mu;s</td><td>16.20 &mu;s</td><td>22.17 &mu;s</td><td>0.56</td><td>0.02</td><td>5</td><td>730 B</td><td>-</td><td>-</td><td>-</td><td>-</td>
 </tr></tbody></table>
 </body>
 </html>

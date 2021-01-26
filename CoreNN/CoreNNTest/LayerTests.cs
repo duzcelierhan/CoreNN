@@ -64,13 +64,25 @@ namespace CoreNNTest
                 for (var i = 0; i < neuronCount; i++)
                 {
                     var wAndB = weMem[i].ToArray();
-                    var total = inputs.Select((t, j) => wAndB[j] * t).Sum();
+                    //var total = inputs.Select((t, j) => wAndB[j] * t).Sum();
+                    var total = PrivateSum(inputs.Select((t, j) => wAndB[j] * t));
 
                     total += wAndB[inputs.Length];
                     var nOut = activationFunction.Forward(ref total);
                     Assert.That(outputs[i], Is.EqualTo(nOut)/*.Within(.0001f)*/, $"Output is not as expected on neuron #{i}");
                 }
             });
+        }
+
+        private float PrivateSum(IEnumerable<float> numbers)
+        {
+            var total = 0f;
+            foreach (var item in numbers)
+            {
+                total += item;
+            }
+
+            return total;
         }
 
         private static IEnumerable<TestCaseData> SingleLayerTestCaseGenerator()

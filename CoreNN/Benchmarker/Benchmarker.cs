@@ -8,8 +8,8 @@ namespace Benchmarker
 {
     [RankColumn]
     [MemoryDiagnoser]
-    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp30)]
-    [DisassemblyDiagnoser(printAsm: true, printSource: true)]
+    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp50)]
+    [DisassemblyDiagnoser(printInstructionAddresses: true, printSource: true)]
     public class Benchmarker
     {
         private Memory<float> m_Ma1;
