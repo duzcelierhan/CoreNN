@@ -64,7 +64,7 @@ namespace CoreNN
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void CalculateNeuron(Neuron neuron)
         {
-            
+            neuron.Calculate(m_Inputs);
         }
     }
 }

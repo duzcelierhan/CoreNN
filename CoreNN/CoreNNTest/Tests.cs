@@ -26,12 +26,6 @@ namespace CoreNNTest
         }
 
         [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
-
-        [Test]
         [Explicit]
         [TestCase(1023, F2_1023File)]
         [TestCase(1024, F2_1024File)]
